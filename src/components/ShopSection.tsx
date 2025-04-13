@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { MinusCircle, PlusCircle, ShoppingCart } from 'lucide-react';
@@ -21,8 +22,8 @@ const ShopSection = () => {
       id: 1,
       name: "AROVA Sensitive",
       description: "Our gentle formula with a soft, calming touch. Perfect for sensitive skin.",
-      price: 19.99,
-      image: "/lovable-uploads/35a46c04-b72d-43fb-8f39-3cbb1789ae20.png",
+      price: 200,
+      image: "/lovable-uploads/29e70c0d-dc5a-4512-bb39-889ebbba86a3.png",
       options: [
         { name: "Size", value: "50ml" },
         { name: "Scent", value: "Unscented" }
@@ -32,8 +33,8 @@ const ShopSection = () => {
       id: 2,
       name: "AROVA Original",
       description: "Our classic formula with a fresh, natural fragrance. Ideal for everyday use.",
-      price: 21.99,
-      image: "/lovable-uploads/ebfdd314-9a56-45d6-958c-5cb72df05f5b.png",
+      price: 200,
+      image: "/lovable-uploads/5796cff4-d0d2-4482-af3a-3dc7df632f6b.png",
       options: [
         { name: "Size", value: "50ml" },
         { name: "Scent", value: "Original" }
@@ -107,11 +108,11 @@ const ShopSection = () => {
               key={product.id}
               className="product-card bg-white rounded-2xl shadow-lg overflow-hidden"
             >
-              <div className="relative h-64 overflow-hidden bg-white flex justify-center items-center">
+              <div className="relative h-80 overflow-hidden bg-white flex justify-center items-center">
                 <img 
                   src={product.processedImage || product.image} 
                   alt={product.name} 
-                  className="product-image w-full h-full object-contain transition-transform duration-300 p-4"
+                  className="product-image w-auto h-full object-contain p-4"
                 />
               </div>
               <div className="p-6">
@@ -130,7 +131,7 @@ const ShopSection = () => {
                 )}
                 
                 <div className="flex justify-between items-center mb-4">
-                  <div className="text-xl font-semibold text-arova-primary">${product.price.toFixed(2)}</div>
+                  <div className="text-xl font-semibold text-arova-primary">₹{product.price.toFixed(2)}</div>
                   <div className="flex items-center">
                     <button 
                       className="text-gray-400 hover:text-arova-primary transition-colors"

@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from 'lucide-react';
@@ -5,7 +6,7 @@ import { removeBackground, loadImage } from '@/utils/imageUtils';
 
 const HeroSection = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [productImage, setProductImage] = useState<string>("/lovable-uploads/35a46c04-b72d-43fb-8f39-3cbb1789ae20.png");
+  const [productImage, setProductImage] = useState<string>("/lovable-uploads/5796cff4-d0d2-4482-af3a-3dc7df632f6b.png");
   
   useEffect(() => {
     const handleScroll = () => {
@@ -27,7 +28,7 @@ const HeroSection = () => {
   useEffect(() => {
     const processImage = async () => {
       try {
-        const originalImage = await loadImage(new Blob([await fetch("/lovable-uploads/35a46c04-b72d-43fb-8f39-3cbb1789ae20.png").then(r => r.blob())]));
+        const originalImage = await loadImage(new Blob([await fetch("/lovable-uploads/5796cff4-d0d2-4482-af3a-3dc7df632f6b.png").then(r => r.blob())]));
         const backgroundRemovedBlob = await removeBackground(originalImage);
         setProductImage(URL.createObjectURL(backgroundRemovedBlob));
       } catch (error) {
@@ -89,7 +90,7 @@ const HeroSection = () => {
             <img 
               src={productImage}
               alt="AROVA Product" 
-              className="w-full h-full object-contain drop-shadow-2xl p-8"
+              className="w-auto h-full object-contain drop-shadow-2xl p-8"
             />
           </div>
         </div>
