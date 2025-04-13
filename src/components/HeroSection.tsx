@@ -1,10 +1,11 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from 'lucide-react';
+import { removeBackground, loadImage } from '@/utils/imageUtils';
 
 const HeroSection = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [productImage, setProductImage] = useState<string>("/lovable-uploads/d6ac1084-e2c8-44bb-9ce1-1912f3670621.png");
   
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +23,20 @@ const HeroSection = () => {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  useEffect(() => {
+    const processImage = async () => {
+      try {
+        const originalImage = await loadImage(new Blob([await fetch("/lovable-uploads/d6ac1084-e2c8-44bb-9ce1-1912f3670621.png").then(r => r.blob())]));
+        const backgroundRemovedBlob = await removeBackground(originalImage);
+        setProductImage(URL.createObjectURL(backgroundRemovedBlob));
+      } catch (error) {
+        console.error("Failed to remove background:", error);
+      }
+    };
+
+    processImage();
+  }, []);
 
   return (
     <section id="home" className="relative h-screen flex items-center overflow-hidden">
@@ -78,7 +93,7 @@ const HeroSection = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-arova-soft-green/50 via-transparent to-arova-soft-pink/50 rounded-full animate-pulse-soft"></div>
             <img 
-              src="/lovable-uploads/d6ac1084-e2c8-44bb-9ce1-1912f3670621.png"
+              src={productImage}
               alt="AROVA Product" 
               className="w-full h-full object-contain drop-shadow-2xl p-8"
             />

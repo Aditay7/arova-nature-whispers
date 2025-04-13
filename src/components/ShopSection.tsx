@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { MinusCircle, PlusCircle, ShoppingCart } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
+import { removeBackground, loadImage } from '@/utils/imageUtils';
 
 interface Product {
   id: number;
@@ -9,61 +10,85 @@ interface Product {
   description: string;
   price: number;
   image: string;
+  processedImage?: string;
   options?: { name: string; value: string }[];
 }
 
-const products: Product[] = [
-  {
-    id: 1,
-    name: "AROVA Original",
-    description: "Our classic formula with a subtle floral scent. Perfect for everyday use.",
-    price: 19.99,
-    image: "/lovable-uploads/d6ac1084-e2c8-44bb-9ce1-1912f3670621.png",
-    options: [
-      { name: "Size", value: "50ml" },
-      { name: "Scent", value: "Original" }
-    ]
-  },
-  {
-    id: 2,
-    name: "AROVA Sensitive",
-    description: "Extra gentle formula for sensitive skin. Fragrance-free and hypoallergenic.",
-    price: 21.99,
-    image: "/lovable-uploads/d6660663-a2e5-4d6a-ae3d-9af9d79be989.png",
-    options: [
-      { name: "Size", value: "50ml" },
-      { name: "Scent", value: "Unscented" }
-    ]
-  },
-  {
-    id: 3,
-    name: "AROVA Sport",
-    description: "Enhanced formula with extra protection. Ideal for active lifestyles.",
-    price: 22.99,
-    image: "/lovable-uploads/d6ac1084-e2c8-44bb-9ce1-1912f3670621.png",
-    options: [
-      { name: "Size", value: "50ml" },
-      { name: "Scent", value: "Fresh Mint" }
-    ]
-  },
-  {
-    id: 4,
-    name: "AROVA Gift Set",
-    description: "Three AROVA roll-ons in a beautiful gift box. Perfect for sharing the AROVA experience.",
-    price: 54.99,
-    image: "/lovable-uploads/d6660663-a2e5-4d6a-ae3d-9af9d79be989.png",
-    options: [
-      { name: "Contains", value: "3 × 50ml" },
-      { name: "Scents", value: "Mixed" }
-    ]
-  }
-];
-
 const ShopSection = () => {
   const { toast } = useToast();
+  const [products, setProducts] = useState<Product[]>([
+    {
+      id: 1,
+      name: "AROVA Original",
+      description: "Our classic formula with a subtle floral scent. Perfect for everyday use.",
+      price: 19.99,
+      image: "/lovable-uploads/d6ac1084-e2c8-44bb-9ce1-1912f3670621.png",
+      options: [
+        { name: "Size", value: "50ml" },
+        { name: "Scent", value: "Original" }
+      ]
+    },
+    {
+      id: 2,
+      name: "AROVA Sensitive",
+      description: "Extra gentle formula for sensitive skin. Fragrance-free and hypoallergenic.",
+      price: 21.99,
+      image: "/lovable-uploads/d6660663-a2e5-4d6a-ae3d-9af9d79be989.png",
+      options: [
+        { name: "Size", value: "50ml" },
+        { name: "Scent", value: "Unscented" }
+      ]
+    },
+    {
+      id: 3,
+      name: "AROVA Sport",
+      description: "Enhanced formula with extra protection. Ideal for active lifestyles.",
+      price: 22.99,
+      image: "/lovable-uploads/d6ac1084-e2c8-44bb-9ce1-1912f3670621.png",
+      options: [
+        { name: "Size", value: "50ml" },
+        { name: "Scent", value: "Fresh Mint" }
+      ]
+    },
+    {
+      id: 4,
+      name: "AROVA Gift Set",
+      description: "Three AROVA roll-ons in a beautiful gift box. Perfect for sharing the AROVA experience.",
+      price: 54.99,
+      image: "/lovable-uploads/d6660663-a2e5-4d6a-ae3d-9af9d79be989.png",
+      options: [
+        { name: "Contains", value: "3 × 50ml" },
+        { name: "Scents", value: "Mixed" }
+      ]
+    }
+  ]);
+
   const [quantities, setQuantities] = useState<{ [key: number]: number }>(
     products.reduce((acc, product) => ({ ...acc, [product.id]: 1 }), {})
   );
+
+  useEffect(() => {
+    const processImages = async () => {
+      const processedProducts = await Promise.all(
+        products.map(async (product) => {
+          try {
+            const originalImage = await loadImage(new Blob([await fetch(product.image).then(r => r.blob())]));
+            const backgroundRemovedBlob = await removeBackground(originalImage);
+            return {
+              ...product,
+              processedImage: URL.createObjectURL(backgroundRemovedBlob)
+            };
+          } catch (error) {
+            console.error(`Failed to process image for ${product.name}:`, error);
+            return product;
+          }
+        })
+      );
+      setProducts(processedProducts);
+    };
+
+    processImages();
+  }, []);
 
   const increaseQuantity = (productId: number) => {
     setQuantities(prev => ({
@@ -106,7 +131,7 @@ const ShopSection = () => {
             >
               <div className="relative h-64 overflow-hidden bg-white">
                 <img 
-                  src={product.image} 
+                  src={product.processedImage || product.image} 
                   alt={product.name} 
                   className="product-image w-full h-full object-contain transition-transform duration-300 p-4"
                 />
