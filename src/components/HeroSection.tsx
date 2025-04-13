@@ -5,7 +5,7 @@ import { removeBackground, loadImage } from '@/utils/imageUtils';
 
 const HeroSection = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [productImage, setProductImage] = useState<string>("/lovable-uploads/d6ac1084-e2c8-44bb-9ce1-1912f3670621.png");
+  const [productImage, setProductImage] = useState<string>("/lovable-uploads/35a46c04-b72d-43fb-8f39-3cbb1789ae20.png");
   
   useEffect(() => {
     const handleScroll = () => {
@@ -27,7 +27,7 @@ const HeroSection = () => {
   useEffect(() => {
     const processImage = async () => {
       try {
-        const originalImage = await loadImage(new Blob([await fetch("/lovable-uploads/d6ac1084-e2c8-44bb-9ce1-1912f3670621.png").then(r => r.blob())]));
+        const originalImage = await loadImage(new Blob([await fetch("/lovable-uploads/35a46c04-b72d-43fb-8f39-3cbb1789ae20.png").then(r => r.blob())]));
         const backgroundRemovedBlob = await removeBackground(originalImage);
         setProductImage(URL.createObjectURL(backgroundRemovedBlob));
       } catch (error) {
@@ -84,13 +84,7 @@ const HeroSection = () => {
         </div>
 
         <div className="md:w-1/2 mt-12 md:mt-0 flex justify-center items-center">
-          <div 
-            className="relative w-64 h-64 md:w-80 md:h-80 animate-rotate-slow"
-            style={{ 
-              animationPlayState: scrollPosition > 100 ? 'paused' : 'running',
-              transform: `rotate(${scrollPosition * 0.2}deg)`
-            }}
-          >
+          <div className="relative w-64 h-64 md:w-80 md:h-80">
             <div className="absolute inset-0 bg-gradient-to-br from-arova-soft-green/50 via-transparent to-arova-soft-pink/50 rounded-full animate-pulse-soft"></div>
             <img 
               src={productImage}

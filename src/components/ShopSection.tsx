@@ -19,46 +19,24 @@ const ShopSection = () => {
   const [products, setProducts] = useState<Product[]>([
     {
       id: 1,
-      name: "AROVA Original",
-      description: "Our classic formula with a subtle floral scent. Perfect for everyday use.",
-      price: 19.99,
-      image: "/lovable-uploads/d6ac1084-e2c8-44bb-9ce1-1912f3670621.png",
-      options: [
-        { name: "Size", value: "50ml" },
-        { name: "Scent", value: "Original" }
-      ]
-    },
-    {
-      id: 2,
       name: "AROVA Sensitive",
-      description: "Extra gentle formula for sensitive skin. Fragrance-free and hypoallergenic.",
-      price: 21.99,
-      image: "/lovable-uploads/d6660663-a2e5-4d6a-ae3d-9af9d79be989.png",
+      description: "Our gentle formula with a soft, calming touch. Perfect for sensitive skin.",
+      price: 19.99,
+      image: "/lovable-uploads/35a46c04-b72d-43fb-8f39-3cbb1789ae20.png",
       options: [
         { name: "Size", value: "50ml" },
         { name: "Scent", value: "Unscented" }
       ]
     },
     {
-      id: 3,
-      name: "AROVA Sport",
-      description: "Enhanced formula with extra protection. Ideal for active lifestyles.",
-      price: 22.99,
-      image: "/lovable-uploads/d6ac1084-e2c8-44bb-9ce1-1912f3670621.png",
+      id: 2,
+      name: "AROVA Original",
+      description: "Our classic formula with a fresh, natural fragrance. Ideal for everyday use.",
+      price: 21.99,
+      image: "/lovable-uploads/ebfdd314-9a56-45d6-958c-5cb72df05f5b.png",
       options: [
         { name: "Size", value: "50ml" },
-        { name: "Scent", value: "Fresh Mint" }
-      ]
-    },
-    {
-      id: 4,
-      name: "AROVA Gift Set",
-      description: "Three AROVA roll-ons in a beautiful gift box. Perfect for sharing the AROVA experience.",
-      price: 54.99,
-      image: "/lovable-uploads/d6660663-a2e5-4d6a-ae3d-9af9d79be989.png",
-      options: [
-        { name: "Contains", value: "3 × 50ml" },
-        { name: "Scents", value: "Mixed" }
+        { name: "Scent", value: "Original" }
       ]
     }
   ]);
@@ -123,23 +101,18 @@ const ShopSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {products.map((product) => (
             <div 
               key={product.id}
               className="product-card bg-white rounded-2xl shadow-lg overflow-hidden"
             >
-              <div className="relative h-64 overflow-hidden bg-white">
+              <div className="relative h-64 overflow-hidden bg-white flex justify-center items-center">
                 <img 
                   src={product.processedImage || product.image} 
                   alt={product.name} 
                   className="product-image w-full h-full object-contain transition-transform duration-300 p-4"
                 />
-                {product.id === 1 && (
-                  <div className="absolute top-4 left-4 bg-arova-primary text-white text-xs font-bold px-3 py-1 rounded-full">
-                    Best Seller
-                  </div>
-                )}
               </div>
               <div className="p-6">
                 <h3 className="font-serif text-xl font-semibold text-arova-primary mb-1">{product.name}</h3>
@@ -185,21 +158,6 @@ const ShopSection = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="mt-16 bg-white rounded-2xl shadow-lg p-8 text-center">
-          <h3 className="font-serif text-2xl font-semibold text-arova-primary mb-4">
-            Subscribe & Save
-          </h3>
-          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-            Never run out of AROVA. Subscribe to regular deliveries and save 15% on every order.
-            Pause, skip, or cancel anytime.
-          </p>
-          <Button 
-            className="bg-arova-secondary hover:bg-arova-secondary/90 text-white px-8"
-          >
-            Learn More About Subscriptions
-          </Button>
         </div>
       </div>
     </section>
