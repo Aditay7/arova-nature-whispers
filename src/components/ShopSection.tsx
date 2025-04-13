@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { MinusCircle, PlusCircle, ShoppingCart } from 'lucide-react';
@@ -19,7 +18,7 @@ const products: Product[] = [
     name: "AROVA Original",
     description: "Our classic formula with a subtle floral scent. Perfect for everyday use.",
     price: 19.99,
-    image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&q=80",
+    image: "/lovable-uploads/d6ac1084-e2c8-44bb-9ce1-1912f3670621.png",
     options: [
       { name: "Size", value: "50ml" },
       { name: "Scent", value: "Original" }
@@ -30,7 +29,7 @@ const products: Product[] = [
     name: "AROVA Sensitive",
     description: "Extra gentle formula for sensitive skin. Fragrance-free and hypoallergenic.",
     price: 21.99,
-    image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&q=80",
+    image: "/lovable-uploads/d6660663-a2e5-4d6a-ae3d-9af9d79be989.png",
     options: [
       { name: "Size", value: "50ml" },
       { name: "Scent", value: "Unscented" }
@@ -41,7 +40,7 @@ const products: Product[] = [
     name: "AROVA Sport",
     description: "Enhanced formula with extra protection. Ideal for active lifestyles.",
     price: 22.99,
-    image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&q=80",
+    image: "/lovable-uploads/d6ac1084-e2c8-44bb-9ce1-1912f3670621.png",
     options: [
       { name: "Size", value: "50ml" },
       { name: "Scent", value: "Fresh Mint" }
@@ -52,7 +51,7 @@ const products: Product[] = [
     name: "AROVA Gift Set",
     description: "Three AROVA roll-ons in a beautiful gift box. Perfect for sharing the AROVA experience.",
     price: 54.99,
-    image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&q=80",
+    image: "/lovable-uploads/d6660663-a2e5-4d6a-ae3d-9af9d79be989.png",
     options: [
       { name: "Contains", value: "3 × 50ml" },
       { name: "Scents", value: "Mixed" }
@@ -105,11 +104,11 @@ const ShopSection = () => {
               key={product.id}
               className="product-card bg-white rounded-2xl shadow-lg overflow-hidden"
             >
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-64 overflow-hidden bg-white">
                 <img 
                   src={product.image} 
                   alt={product.name} 
-                  className="product-image w-full h-full object-cover transition-transform duration-300"
+                  className="product-image w-full h-full object-contain transition-transform duration-300 p-4"
                 />
                 {product.id === 1 && (
                   <div className="absolute top-4 left-4 bg-arova-primary text-white text-xs font-bold px-3 py-1 rounded-full">

@@ -69,7 +69,6 @@ const HeroSection = () => {
         </div>
 
         <div className="md:w-1/2 mt-12 md:mt-0 flex justify-center items-center">
-          {/* 3D product rendering placeholder - we'll use an image for now */}
           <div 
             className="relative w-64 h-64 md:w-80 md:h-80 animate-rotate-slow"
             style={{ 
@@ -79,9 +78,9 @@ const HeroSection = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-arova-soft-green/50 via-transparent to-arova-soft-pink/50 rounded-full animate-pulse-soft"></div>
             <img 
-              src="https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&q=80"
+              src="/lovable-uploads/d6ac1084-e2c8-44bb-9ce1-1912f3670621.png"
               alt="AROVA Product" 
-              className="w-full h-full object-contain drop-shadow-2xl rounded-full p-8"
+              className="w-full h-full object-contain drop-shadow-2xl p-8"
             />
           </div>
         </div>
